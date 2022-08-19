@@ -2,6 +2,10 @@
   first_location = 
     if @locations != [], do: hd(@locations), else: %{lat: 35.658581, long: 139.745433}
 %>
+<form action="" metod="get">
+  <input type="text" name="search_text" placeholder="絞り込み検索">
+  <button type="submit">検索</button>
+</form>
 
 <%= link "座標登録", to: Routes.map_path(@conn, :new) %>
 

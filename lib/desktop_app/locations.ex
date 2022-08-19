@@ -1,4 +1,5 @@
 defmodule DesktopApp.Locations do
+  import Ecto.Query
   alias DesktopApp.Repo
   alias DesktopApp.Locations.Location
 
@@ -24,5 +25,14 @@ defmodule DesktopApp.Locations do
 
   def delete_location(location) do
     Repo.delete(location)
+  end
+
+  def search_location(text) do
+    query =
+      from(l in Location,
+       where: like(l.location_name, ^"%#{text}%")
+       )
+
+       Repo.all(query)
   end
 end

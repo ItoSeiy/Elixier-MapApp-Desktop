@@ -3,10 +3,39 @@ defmodule DesktopAppWeb.MapController do
   alias DesktopApp.Locations.Location
   alias DesktopApp.Locations
 
+  # パターン１
+  def index(conn, %{"search_text" => text}) do
+    locations = Locations.search_location(text)
+    render(conn, "index.html", locations: locations)
+  end
+
   def index(conn, _params) do
     locations = Locations.get_locations()
     render(conn, "index.html", locations: locations)
   end
+
+  # パターン２
+  # def index(conn, params) do
+  #   locations =
+  #     if text = Map.get(params, "search_text") do
+  #       Locations.search_location(text)
+  #     else
+  #       Locations.get_locations()
+  #     end
+
+  #   render(conn, "index.html", locations: locations)
+  # end
+
+  # パターン３
+  # def index(conn, params) do
+  #   locations =
+  #     case params do
+  #       %{"search_text" => text} -> Locations.search_location(text)
+  #       %{} -> Locations.get_locations()
+  #     end
+
+  #   render(conn, "index.html", locations: locations)
+  # end
 
   def new(conn, _params) do
     changeset = Location.changeset(%Location{}, %{})
