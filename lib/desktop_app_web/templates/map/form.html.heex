@@ -1,0 +1,23 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>入力内容が正しくありません。</p>
+    </div>
+  <% end %>
+
+  <%= label f, :lat, "緯度" %>
+  <%= number_input f, :lat, step: "any" %>
+  <%= error_tag f, :lat %>
+
+  <%= label f, :long, "経度" %>
+  <%= number_input f, :long, step: "any" %>
+  <%= error_tag f, :long %>
+
+  <%= label f, :location_name, "場所名" %>
+  <%= text_input f, :location_name %>
+  <%= error_tag f, :location_name %>
+
+  <div>
+    <%= submit "保存" %>
+  </div>
+</.form>

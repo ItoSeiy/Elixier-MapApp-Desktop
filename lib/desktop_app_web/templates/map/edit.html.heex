@@ -1,0 +1,9 @@
+<h1>座標の編集</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.map_path(@conn, :update, @location)) %>
+
+<span>
+  <%= link "メインページに戻る", to: Routes.map_path(@conn, :index) %>
+  | <%= link "詳細ページに戻る", to: Routes.map_path(@conn, :show, @location) %>
+
+</span>

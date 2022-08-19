@@ -1,0 +1,33 @@
+<div id="map" style="height: 500px"></div>
+
+<table>
+  <tr>
+    <th>緯度</th>
+    <th>経度</th>
+    <th>場所名</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><%= @location.lat %></td>
+    <td><%= @location.long %></td>
+    <td><%= @location.location_name %></td>
+    <td>
+      <%= link "編集", to: Routes.map_path(@conn, :edit, @location) %>
+      | <%= link "削除", to: Routes.map_path(@conn, :delete, @location), method: :delete %>
+    </td>
+  </tr>
+</table>
+
+<span><%= link "戻る", to: Routes.map_path(@conn, :index) %></span>
+
+<script>
+var map = L.map('map').setView([<%= @location.lat %>, <%= @location.long %>], 15);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([<%= @location.lat %>, <%= @location.long %>]).addTo(map)
+  .bindPopup('<%= @location.location_name %>')
+  .openPopup();
+</script>

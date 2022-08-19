@@ -1,0 +1,5 @@
+<h1>座標の登録</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.map_path(@conn, :create)) %>
+
+<span><%= link "戻る", to: Routes.map_path(@conn, :index) %></span>
